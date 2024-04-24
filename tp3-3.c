@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
 #define N 5
 #define M 12
 
@@ -10,7 +11,7 @@ void liberarMemoria(char **nombres);
 void mostrarMatriz(char **registro);
 
 int main(){
-    
+
     char **nombres = (char **)malloc(sizeof(char*)*N);
     for (int i = 0; i < M; i++){
         nombres[i] = (char*)malloc(sizeof(char)*M);
@@ -20,6 +21,8 @@ int main(){
     cargarMatriz(nombres);
     mostrarMatriz(nombres);
     liberarMemoria(nombres);
+
+    return 0;
 }
 
 void limpiarMatriz(char **arreglo){
@@ -33,13 +36,13 @@ void limpiarMatriz(char **arreglo){
 void cargarMatriz(char **registro){
     char caracter;
     for (int i = 0; i < N; i++){
-        int longitud=0,capacidad = 12;
+        int longitud=0, capacidad = 12;
         fflush(stdin);
         printf("\nIngrese el nombre %d (para terminar presione ENTER):\t",i+1);
         while ((caracter = getchar()) != '\n'){
             if (longitud >= capacidad){
                 capacidad++;
-                char *aux = (char*)malloc(sizeof(char)* longitud);
+                char *aux = (char*)realloc(registro[i],sizeof(char)* capacidad);
                 registro[i] = aux;
             }
             registro[i][longitud]=(char)caracter;
@@ -58,9 +61,10 @@ void liberarMemoria(char **nombres){
 }
 
 void mostrarMatriz(char **registro){
-    puts("\n\t\tNOMBRES INGRESADOS");
+    puts("\n\t\t\tNOMBRES INGRESADOS");
     for (int i = 0; i < N; i++)
     {
         printf("\nNombre %d:\t%s",i+1,registro[i]);
     }
+    printf("\n\n");
 }
