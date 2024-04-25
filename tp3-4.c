@@ -76,7 +76,7 @@ producto *cargarStock(int cantidad){
         listaAux2[i].productoId = i+1;
         listaAux2[i].cantDisponible = 1 + rand()%100;
         listaAux2[i].tipoProducto = (char*)strdup(TiposProductos[i]);
-        listaAux2[i].precioUnitario = 1 + ((rand()%10000)/100);
+        listaAux2[i].precioUnitario = 1 + ((rand()%10000)*0.01);
     }
     
     return (listaAux2);
